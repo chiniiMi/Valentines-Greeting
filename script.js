@@ -127,37 +127,50 @@ let audioElement = null;
 function initMusicPlayer() {
     audioElement = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicBtn');
+    const musicStatus = document.getElementById('musicStatus');
     const progressBar = document.querySelector('.progress-bar');
     const progress = document.getElementById('progress');
     
     if (!audioElement || !musicBtn) return;
     
-    // Auto-play music when page loads
+    // Preload and attempt autoplay; update UI optimistically to reduce perceived delay
+    try {
+        audioElement.preload = 'auto';
+        audioElement.load();
+    } catch (e) {}
+
+    // Optimistic UI: show playing state immediately when attempting play, revert on error
     audioElement.muted = false; // Unmute the audio
+    if (musicBtn) musicBtn.classList.add('playing');
+    if (musicStatus) { musicStatus.textContent = 'Playing'; musicStatus.classList.add('playing'); }
+
     const playPromise = audioElement.play();
     if (playPromise !== undefined) {
-        playPromise
-            .then(() => {
-                musicBtn.classList.add('playing');
-                console.log('Music auto-playing');
-            })
-            .catch((error) => {
-                // Auto-play blocked - user needs to interact first
-                console.log('Auto-play failed:', error);
-                musicBtn.classList.remove('playing');
-                // Add a small visual indicator that user can click to play
-            });
+        playPromise.catch((error) => {
+            // Auto-play blocked or failed - revert UI
+            console.log('Auto-play failed:', error);
+            if (musicBtn) musicBtn.classList.remove('playing');
+            if (musicStatus) { musicStatus.textContent = 'Paused'; musicStatus.classList.remove('playing'); }
+        });
     }
     
     // Music button toggle (bottom player)
     musicBtn.addEventListener('click', () => {
         if (audioElement.paused) {
-            audioElement.muted = false; // Ensure unmuted when playing
-            audioElement.play().catch(err => console.log('Play error:', err));
+            // Optimistically update UI first for immediate feedback
             musicBtn.classList.add('playing');
+            if (musicStatus) { musicStatus.textContent = 'Playing'; musicStatus.classList.add('playing'); }
+            audioElement.muted = false; // Ensure unmuted when playing
+            audioElement.play().catch(err => {
+                console.log('Play error:', err);
+                // Revert UI on failure
+                musicBtn.classList.remove('playing');
+                if (musicStatus) { musicStatus.textContent = 'Paused'; musicStatus.classList.remove('playing'); }
+            });
         } else {
             audioElement.pause();
             musicBtn.classList.remove('playing');
+            if (musicStatus) { musicStatus.textContent = 'Paused'; musicStatus.classList.remove('playing'); }
         }
     });
     
@@ -181,6 +194,7 @@ function initMusicPlayer() {
     // Handle when music ends
     audioElement.addEventListener('ended', () => {
         musicBtn.classList.remove('playing');
+        if (musicStatus) { musicStatus.textContent = 'Ended'; musicStatus.classList.remove('playing'); }
     });
     
     // Handle errors

@@ -23,7 +23,7 @@
     </div>
     
     <!-- Audio Player -->
-    <audio id="bgMusic" autoplay loop muted>
+    <audio id="bgMusic" autoplay loop muted preload="auto" playsinline>
         <source src="blue.mp3" type="audio/mpeg">
     </audio>
     
@@ -36,7 +36,7 @@
     <div class="music-player">
         <button id="musicBtn" class="music-btn" title="Toggle Music">🎵</button>
         <div class="music-info">
-            <span id="musicTitle">Blue</span>
+            <span id="musicTitle">Blue <span id="musicStatus" class="music-status">Paused</span></span>
             <div class="progress-bar">
                 <div id="progress" class="progress"></div>
             </div>

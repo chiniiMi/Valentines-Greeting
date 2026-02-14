@@ -561,6 +561,23 @@ body {
     letter-spacing: 0.5px;
 }
 
+.music-status {
+    color: rgba(255,255,255,0.9);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 2px;
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.06);
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.music-status.playing {
+    background: rgba(0,255,128,0.15);
+    color: #b7ffd2;
+}
+
 .progress-bar {
     width: 150px;
     height: 4px;
