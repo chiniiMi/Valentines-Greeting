@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Heart Splash Screen -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="hearts-splash-container">
+            <div class="heart-splash heart-1">❤️</div>
+            <div class="heart-splash heart-2">💕</div>
+            <div class="heart-splash heart-3">💖</div>
+            <div class="heart-splash heart-4">💗</div>
+            <div class="heart-splash heart-5">💝</div>
+        </div>
+        <p class="splash-text">Happy Valentine's Day</p>
+    </div>
+    
+    <!-- Audio Player -->
+    <audio id="bgMusic" autoplay loop muted>
+        <source src="blue.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="background"></div>
+    
+    <!-- Floating hearts background -->
+    <div class="hearts-container"></div>
+    
+    <!-- Music Player Control -->
+    <div class="music-player">
+        <button id="musicBtn" class="music-btn" title="Toggle Music">🎵</button>
+        <div class="music-info">
+            <span id="musicTitle">Blue</span>
+            <div class="progress-bar">
+                <div id="progress" class="progress"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main content -->
+    <div class="container">
+        <div class="content">
+            <div class="title">
+                <h1>Happy Valentine's Day</h1>
+        
+            </div>
+            
+            <div class="heart-main">
+                <img src="characters.gif" alt="Dudu and Bubu" class="main-heart">
+            </div>
+            
+            <div class="message">
+                <p class="text-line">Haiiiiiiii!!</p>
+                <p class="text-line delay-1" style="font-size: 1.8rem; font-weight: 700;">ATE THIN NA MAGANDA</p>
+                <p class="text-line delay-2">Nyek🤪🤪</p>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="showSurprise()">Click for Surprise</button>
+            </div>
+        </div>
+        
+        <!-- Confetti container -->
+        <div class="confetti-container"></div>
+    </div>
+    
+    <!-- Hidden surprise message -->
+    <div class="surprise-modal" id="surpriseModal">
+        <div class="surprise-content">
+            <span class="close" onclick="closeSurprise()">&times;</span>
+            <h2>Wahhhhhhhhhhhhh!</h2>
+            <p class="surprise-text">Thank you for being such an incredible person ate Thin. Your kindness, smile, and heart make the world brighter. I'm grateful for every moment na nakasama po kita ate. Simula noong una kahit sobrang tahimik ko you always approach me. Sobrang saya kolang na naging kaibigan kayo, kakamiss yung mga kulitan, tawanan at asaran natin. Kahit na nagkaroon ng tampuhan you always there parin as our ate. Thank you so much po talaga for every lesson and care for us. Maging maganda kalang po palagi👀❤</p>
+            <button class="btn btn-primary" onclick="celebrateClick()">Celebrate</button>
+        </div>
+    </div>
+    
+    <!-- Hacked Notification -->
+    <div class="hacked-notification" id="hackedNotif">
+        <div class="hacked-content">
+            <p class="hacked-text">NAHACK KA BLEHHH</p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
